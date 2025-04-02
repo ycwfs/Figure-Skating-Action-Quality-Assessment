@@ -1,0 +1,82 @@
+dataset_name: finefs
+train_split: [training]
+val_split: [validation]
+devices: ["cuda:0"]
+dataset: {
+  annotation_folder: /data1/code/datasets/fs/finefs/,
+  vid_feat_folder: /data1/code/datasets/fs/finefs/i3d,
+  aud_feat_folder: /data1/code/datasets/fs/finefs/vggish,
+  file_prefix: None,
+  file_ext: .npy,
+  # used to normalize the score to [0, 1]
+  max_score: 22,
+  # 4 classes: jump, spin, step, none
+  num_classes: 24,
+  # class path
+  class_path: /data1/code/datasets/fs/finefs/24_class.json,
+  input_dim: 1024,
+  feat_stride: 24, #每个特征点覆盖的原始视频帧数。
+  num_frames: 24,  #每个clip帧数
+  default_fps: 24,
+  trunc_thresh: 0.5,
+  crop_ratio: [0.9, 1.0],
+  # upsample the features to a fixed length of 192 96
+  max_seq_len: 288,
+  force_upsampling: True,
+  element_numbers: 12, # short program 7, free skate 12
+}
+model: {
+  fpn_type: identity,
+  # default regression range is better
+  # regression_range: [(0, 4), (4, 8), (8, 16), (16, 32), (32, 64), (64, 10000)],
+  max_buffer_len_factor: 1.0,
+  backbone_arch: [2, 2, 5],
+  # mha window size for each level, -1 means no mha，local mha window size, to decrease the computation cost, for the last level, it temporal dimension is shorter so don't use local mha
+  # n_mha_win_size: [7, 7, 7, 7, 7, -1],
+  n_mha_win_size: -1,
+  # shrink the model for reduced input feature channels
+  n_head: 8,
+  embd_dim: 512,
+  fpn_dim: 512,
+  head_dim: 512,
+  use_abs_pe: True,
+}
+opt: {
+  learning_rate: 0.001,
+  epochs: 500,
+  weight_decay: 0.05,
+}
+loader: {
+  batch_size: 8,
+}
+train_cfg: {
+  init_loss_norm: 200,
+  clip_grad_l2norm: 1.0,
+  cls_prior_prob: 0.01,
+  center_sample: radius,
+  center_sample_radius: 1.5,
+  label_smoothing: 0.1,
+  droppath: 0.1,
+  loss_weight: -1, # 2.0 -1
+}
+
+# similar to THUMOS
+test_cfg: {
+  # vote operations to get better results
+  voting_thresh: 0.9,
+  # nms之前的topk proposals来源自sigmoid后的大于min_score的预测
+  pre_nms_topk: 3000,
+  # max of predictions per video after nms, for fs, only 7 or 12 elements, should match the element_numbers
+  max_seg_num: 12,
+  # less influence
+  min_score: 0.005,
+  # score fusion
+  multiclass_nms: False,
+  nms_sigma : 0.75,
+  # no external scores so cant compute auc
+  # ext_score_file: /data1/code/FSALA/data/anet_1.3/annotations/cuhk_val_simp_share.json,
+  # file short segments
+  duration_thresh: 0.001,
+  cls_ignore: False,
+}
+output_folder: ./ckpt/finefs/

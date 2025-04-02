@@ -1,0 +1,80 @@
+# Learning Long-Range Action Representation by a Two-Stream Multi-Modal Network for Figure Skating TES and PCS Assessment
+
+## Introduction
+
+Technical Element Score (TES) and Program Component Score (PCS) evaluations in figure skating demand precise assessment of athletic actions and artistic interpretation, respectively. Existing methods face three major challenges.
+
+* Firstly, video and audio cues are regarded as common features for both TES and PCS predictions in previous works without considering the prior evaluation criterion of figure skating.
+* Secondly, action elements in competitions are separated in time, existing methods try to give a total TES prediction while each action element isn't evaluated.
+* Thirdly, lengthy competition videos make it difficult to learning long-range contexts.
+
+To address these challenges, we propose a two-stream multi-modal framework to predict TES and PCS. By separating visual-feature based TES evaluation stream from audio-visual-feature based PCS evaluation stream, we created a theoretically sound approach that aligns with actual judging criteria.
+
+* In the PCS evaluation stream, we introduce a multi-level fusion mechanism to guarantee that video-based features remain unaffected when assessing TES and enhance PCS estimation by fusing visual and auditory cues across each contextual level of the pyramid.
+* In the TES evaluation stream, the multi-scale mamba pyramid and TES head we proposed effectively address the challenges of localizing and evaluating action elements with various temporal scales and give the score predictions.
+* With mamba’s superior ability to capture long-range dependencies, our method is ideal for handling long-time figure skating videos.
+
+## Code Overview
+* ./libs/core: Parameter configuration module.
+* ./libs/datasets: Data loader and IO module.
+* ./libs/modeling: Our main model with all its building blocks.
+* ./libs/utils: Utility functions for training, inference, and postprocessing.
+* ./causal-conv1d: A PyTorch implementation of causal convolution for mamba.
+* ./mamba: A PyTorch implementation of Mamba
+
+## Installation
+
+* Follow INSTALL.md for installing necessary dependencies and compiling the code.
+
+## To Reproduce Our Results on FineFS
+
+**Download Features and Annotations**
+
+* Download *finefs.tar.gz* from [this BaiduYun link](https://pan.baidu.com/s/1TgS91LVV-vzFTgIHl1AEGA?pwd=74eh).
+* The file includes I3D and VGGish features, annotations in json format.
+
+**Details**: The features are extracted using [video_features](https://github.com/v-iashin/video_features)
+
+**Unpack Features and Annotations**
+
+* Unpack the file under *./data* (or elsewhere and link to *./data*).
+* The folder structure should look like
+
+```
+Root folder
+│   README.md
+│   ...  
+│
+└───data/
+│    └───finefs/
+│    │	 └───i3d
+│    │	 └───vggish
+│    │	 └───annotation/
+│    │	     └───1.json
+│    │	     └───...
+│    └───...
+|
+└───libs
+│
+│   ...
+```
+
+**Training and Evaluation**
+
+* Train our model with I3D and VGGish features. This will create an experiment folder under *./ckpt* that stores training config, logs, and checkpoints.
+
+```shell
+python ./train.py ./configs/finefs.yaml --output reproduce
+```
+
+* [Optional] Monitor the training using TensorBoard
+
+```shell
+tensorboard --logdir=./ckpt/finefs/logs
+```
+
+* Evaluate the trained model.
+
+```shell
+python ./eval.py ./configs/finefs.yaml ./ckpt/finefs
+```
