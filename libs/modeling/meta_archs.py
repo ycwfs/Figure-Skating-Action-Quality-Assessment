@@ -1016,13 +1016,9 @@ class PtTransformer(nn.Module):
             pred_prob = pred_prob[:num_topk].clone()
             topk_idxs = topk_idxs[idxs[:num_topk]].clone()
 
-            # fix a warning in pytorch 1.9
-            # 张量和标量做逐除法  因为前面使用flatten展开了之后，除类别数得到真实index； [288,24], 展开后为[288*24],将其除以24得到真实时间点的index，范围是 0~288
             pt_idxs =  torch.div(topk_idxs, self.num_classes, rounding_mode='floor')
-            # 取除得到的余数，就得到在那个时间点的类别index，范围是 0~23
             cls_idxs = torch.fmod(topk_idxs, self.num_classes)
 
-            # 3. gather predicted offsets, 有重复的pt_idxs
             offsets = offsets_i[pt_idxs]
             pts = pts_i[pt_idxs]
             # get the predicted score at the same time stamp idx

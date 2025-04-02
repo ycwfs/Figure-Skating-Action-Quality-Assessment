@@ -8,15 +8,13 @@ dataset: {
   aud_feat_folder: /data1/code/datasets/fs/fs1000/vggish,
   file_prefix: None,
   file_ext: .npy,
-  # used to normalize the score to [0, 1]
   max_score: 22,
-  # 4 classes: jump, spin, step, none
   num_classes: 24,
   # class path
   class_path: /data1/code/datasets/fs/finefs/24_class.json,
   input_dim: 1024,
-  feat_stride: 24, #每个特征点覆盖的原始视频帧数。
-  num_frames: 24,  #每个clip帧数
+  feat_stride: 24,
+  num_frames: 24, 
   default_fps: 24,
   trunc_thresh: 0.5,
   crop_ratio: [0.9, 1.0],
@@ -27,8 +25,6 @@ dataset: {
 }
 model: {
   fpn_type: identity,
-  # default regression range is better
-  # regression_range: [[0, 2], [2, 4], [4, 8], [8, 16], [16, 32], [32, 10000]],
   max_buffer_len_factor: 1.0,
   # mha window size for each level, -1 means no mha
   n_mha_win_size: [7, 7, 7, 7, 7, -1],
@@ -62,7 +58,6 @@ train_cfg: {
 test_cfg: {
   # vote operations to get better results
   voting_thresh: 0,
-  # nms之前的topk proposals来源自sigmoid后的大于min_score的预测
   pre_nms_topk: 3000,
   # max of predictions per video after nms, for fs, onlt 7 or 12 elements
   max_seg_num: 12,

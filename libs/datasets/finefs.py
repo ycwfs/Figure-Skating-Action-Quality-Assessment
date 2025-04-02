@@ -94,16 +94,12 @@ class FineFS(Dataset):
         return len(self.dict_list)
 
     def convert_timestamp(self, time_str: str):
-        # 分割字符串，获取每个时间部分
         time_parts = time_str.split(',')
         
-        # 初始化一个空列表来存储秒数
         seconds_list = []
         
         for part in time_parts:
-            # 分割每个部分，获取分钟和秒
             minutes, seconds = map(int, part.split('-'))
-            # 将分钟转换为秒并相加
             total_seconds = minutes * 60 + seconds
             seconds_list.append(total_seconds)
         
@@ -115,8 +111,6 @@ class FineFS(Dataset):
         for element in list(elements.values()):
             segments.append(self.convert_timestamp(element['time']))
             labels.append(self.classes[f"{element[f'{self.num_classes}_class']}"]) # xx element  coarse_class
-            # labels.append(self.classes[f"{element['coarse_class']}"]) # 4  coarse_class
-            # labels.append(self.classes[f"{element['element']}"]) # 242 element
             element_scores.append(round((element['score_of_pannel'] / self.max_score), 2))
         
         # load video,audio features
@@ -151,15 +145,6 @@ class FineFS(Dataset):
                 pcs = torch.tensor(round(data["total_program_component_score(factored)"]/100,2))
                 elements = data['executed_element']
                 en = len(elements)
-                # using all data for training and different type of show data for test
-                # if en == self.element_numbers and not self.is_training:
-                #     annotation_data = self._process_elements(file_name, elements)
-                #     annotation_data['pcs'] = pcs
-                #     dict_list.append(annotation_data)
-                # elif self.is_training:
-                #     annotation_data = self._process_elements(file_name, elements)
-                #     annotation_data['pcs'] = pcs
-                #     dict_list.append(annotation_data)
                 annotation_data = self._process_elements(file_name, elements)
                 annotation_data['pcs'] = pcs
                 dict_list.append(annotation_data)
