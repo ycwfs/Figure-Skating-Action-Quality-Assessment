@@ -15,6 +15,7 @@ To address these challenges, we propose a two-stream multi-modal framework to pr
 * With mamba’s superior ability to capture long-range dependencies, our method is ideal for handling long-time figure skating videos.
 
 ## Code Overview
+
 * ./libs/core: Parameter configuration module.
 * ./libs/datasets: Data loader and IO module.
 * ./libs/modeling: Our main model with all its building blocks.
@@ -30,7 +31,7 @@ To address these challenges, we propose a two-stream multi-modal framework to pr
 
 **Download Features and Annotations**
 
-* Download *finefs.tar.gz* from [this BaiduYun link](https://pan.baidu.com/s/1TgS91LVV-vzFTgIHl1AEGA?pwd=74eh).
+* Download *finefs.tar.gz* from [this Google Drive link](https://drive.google.com/file/d/1q0Ht0_rLo97OdHPdbFf4QXRZW2Sa2AZe/view) or [this BaiduYun link](https://pan.baidu.com/s/13lR62zdQeAfdxGSe2uWnag?pwd=7bc6).
 * The file includes I3D and VGGish features, annotations in json format.
 
 **Details**: The features are extracted using [video_features](https://github.com/v-iashin/video_features)
