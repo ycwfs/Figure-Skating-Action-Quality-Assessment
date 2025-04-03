@@ -5,7 +5,7 @@
 Technical Element Score (TES) and Program Component Score (PCS) evaluations in figure skating demand precise assessment of athletic actions and artistic interpretation, respectively. Existing methods face three major challenges.
 
 * Firstly, video and audio cues are regarded as common features for both TES and PCS predictions in previous works without considering the prior evaluation criterion of figure skating.
-* Secondly, action elements in competitions are separated in time, existing methods try to give a total TES prediction while each action element isn't evaluated.
+* Secondly, action elements in competitions are separated in time, TES should be derived from each element's score, but existing methods try to give an overall TES prediction without evaluating each action element.
 * Thirdly, lengthy competition videos make it difficult to learning long-range contexts.
 
 To address these challenges, we propose a two-stream multi-modal framework to predict TES and PCS. By separating visual-feature based TES evaluation stream from audio-visual-feature based PCS evaluation stream, we created a theoretically sound approach that aligns with actual judging criteria.
@@ -15,6 +15,8 @@ To address these challenges, we propose a two-stream multi-modal framework to pr
 * With mamba’s superior ability to capture long-range dependencies, our method is ideal for handling long-time figure skating videos.
 
 ## Code Overview
+
+The structure of this code repo is heavily inspired by Detectron2 and ActionFormer. Some of the main components are
 
 * ./libs/core: Parameter configuration module.
 * ./libs/datasets: Data loader and IO module.
@@ -31,10 +33,10 @@ To address these challenges, we propose a two-stream multi-modal framework to pr
 
 **Download Features and Annotations**
 
-* Download *finefs.tar.gz* from [this Google Drive link](https://drive.google.com/file/d/1q0Ht0_rLo97OdHPdbFf4QXRZW2Sa2AZe/view) or [this BaiduYun link](https://pan.baidu.com/s/13lR62zdQeAfdxGSe2uWnag?pwd=7bc6).
+* Download *finefs.tar.gz* from [this Google Drive link](https://drive.google.com/file/d/10kK9Bc1qX8ISMESCWpUOb0DUGzHnC4WM/view).
 * The file includes I3D and VGGish features, annotations in json format.
 
-**Details**: The features are extracted using [video_features](https://github.com/v-iashin/video_features)
+    The features are extracted using[video_features](https://github.com/v-iashin/video_features)
 
 **Unpack Features and Annotations**
 
@@ -61,6 +63,8 @@ Root folder
 ```
 
 **Training and Evaluation**
+
+    Please modify the data path in the yaml file first
 
 * Train our model with I3D and VGGish features. This will create an experiment folder under *./ckpt* that stores training config, logs, and checkpoints.
 
