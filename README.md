@@ -36,7 +36,7 @@ The structure of this code repo is heavily inspired by Detectron2 and ActionForm
 * Our extracted features and annotations will be released soon.
 * The file includes I3D and VGGish features, annotations in json format.
 
-  The features are extracted using[video_features](https://github.com/v-iashin/video_features)
+  The features are extracted using [video_features](https://github.com/v-iashin/video_features)
 
 **Unpack Features and Annotations**
 
