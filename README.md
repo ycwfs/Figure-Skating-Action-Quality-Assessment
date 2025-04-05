@@ -8,7 +8,7 @@ Technical Element Score (TES) and Program Component Score (PCS) evaluations in f
 * Secondly, action elements in competitions are separated in time, TES should be derived from each element's score, but existing methods try to give an overall TES prediction without evaluating each action element.
 * Thirdly, lengthy competition videos make it difficult to learning long-range contexts.
 
-To address these challenges, we propose a two-stream multi-modal framework to predict TES and PCS. By separating visual-feature based TES evaluation stream from audio-visual-feature based PCS evaluation stream, we created a theoretically sound approach that aligns with actual judging criteria.
+To address these challenges, we propose a theoretically sound two-stream multi-modal framework that aligns with actual judging criteria to predict TES and PCS by separating visual-feature based TES evaluation stream from audio-visual-feature based PCS evaluation stream.
 
 * In the PCS evaluation stream, we introduce a multi-level fusion mechanism to guarantee that video-based features remain unaffected when assessing TES and enhance PCS estimation by fusing visual and auditory cues across each contextual level of the pyramid.
 * In the TES evaluation stream, the multi-scale mamba pyramid and TES head we proposed effectively address the challenges of localizing and evaluating action elements with various temporal scales and give the score predictions.
