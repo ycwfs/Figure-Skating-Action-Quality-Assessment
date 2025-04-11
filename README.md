@@ -1,5 +1,9 @@
 # Learning Long-Range Action Representation by Two-Stream Mamba Pyramid Network for Figure Skating Assessment
 
+## Overview of our method
+
+![img](MMBMS.png)
+
 ## Introduction
 
 Technical Element Score (TES) and Program Component Score (PCS) evaluations in figure skating demand precise assessment of athletic actions and artistic interpretation, respectively. Existing methods face three major challenges.
