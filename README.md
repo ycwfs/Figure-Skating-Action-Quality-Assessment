@@ -1,4 +1,4 @@
-# Learning Long-Range Action Representation by a Two-Stream Multi-Modal Network for Figure Skating TES and PCS Assessment
+# Learning Long-Range Action Representation by Two-Stream Mamba Pyramid Network for Figure Skating Assessment
 
 ## Introduction
 
@@ -8,11 +8,11 @@ Technical Element Score (TES) and Program Component Score (PCS) evaluations in f
 * Secondly, action elements in competitions are separated in time, TES should be derived from each element's score, but existing methods try to give an overall TES prediction without evaluating each action element.
 * Thirdly, lengthy competition videos make it difficult to learning long-range contexts.
 
-To address these challenges, we propose a two-stream multi-modal framework that aligns with actual judging criteria to predict TES and PCS by separating visual-feature based TES evaluation stream from audio-visual-feature based PCS evaluation stream.
+To address these challenges, we propose a two-stream Mamba pyramid network that aligns with actual judging criteria to predict TES and PCS by separating visual-feature based TES evaluation stream from audio-visual-feature based PCS evaluation stream.
 
 * In the PCS evaluation stream, we introduce a multi-level fusion mechanism to guarantee that video-based features remain unaffected when assessing TES and enhance PCS estimation by fusing visual and auditory cues across each contextual level of the pyramid.
 * In the TES evaluation stream, the multi-scale mamba pyramid and TES head we proposed effectively address the challenges of localizing and evaluating action elements with various temporal scales and give the score predictions.
-* With mamba’s superior ability to capture long-range dependencies, our method is ideal for handling long-time figure skating videos.
+* With Mamba’s superior ability to capture long-range dependencies and its linear computational complexity, our method is ideal for handling lengthy figure skating videos.
 
 ## Code Overview
 
