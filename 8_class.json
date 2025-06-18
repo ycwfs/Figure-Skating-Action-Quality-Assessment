@@ -1,0 +1,10 @@
+{
+    "None": 0,
+    "StepSequence": 1,
+    "Jump": 2,
+    "ChComboSpin": 3,
+    "CamelSpin": 4,
+    "LaybackSpin": 5,
+    "SitSpin": 6,
+    "UpSpin": 7
+}
