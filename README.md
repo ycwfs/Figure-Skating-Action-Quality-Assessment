@@ -87,3 +87,15 @@ tensorboard --logdir=./ckpt/finefs/logs
 ```shell
 python ./eval.py ./configs/finefs.yaml ./ckpt/finefs
 ```
+
+## Reference
+If you have referenced our code or paper, please consider citing our paper.
+```
+@inproceedings{wang2025learning,
+  title={Learning Long-Range Action Representation by Two-Stream Mamba Pyramid Network for Figure Skating Assessment},
+  author={Wang, Fengshun and Wang, Qiurui and Zhao, Peilin},
+  booktitle={Proceedings of the 33rd ACM International Conference on Multimedia},
+  pages={867--875},
+  year={2025}
+}
+```
