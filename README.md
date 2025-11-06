@@ -1,4 +1,4 @@
-# Learning Long-Range Action Representation by Two-Stream Mamba Pyramid Network for Figure Skating Assessment [![Conference](https://img.shields.io/badge/ACMMM-2025-green)]() ![visitor badge](https://visitor-badge.laobi.icu/badge?page_id=ycwfs.Figure-Skating-Action-Quality-Assessment)
+# Learning Long-Range Action Representation by Two-Stream Mamba Pyramid Network for Figure Skating Assessment [![Conference](https://img.shields.io/badge/ACM_MM-2025-green)]() ![visitor badge](https://visitor-badge.laobi.icu/badge?page_id=ycwfs.Figure-Skating-Action-Quality-Assessment)
 
 ## Overview of our method
 
