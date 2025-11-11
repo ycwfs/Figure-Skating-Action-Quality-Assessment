@@ -45,7 +45,7 @@ The structure of this code repo is heavily inspired by Detectron2 and ActionForm
 **Unpack Features and Annotations**
 
 * Unpack the file under *./data* (or elsewhere and link to *./data*).
-* The folder structure should look like
+* The folder structure may look like
 
 ```
 Root folder
@@ -66,6 +66,16 @@ Root folder
 │   ...
 ```
 
+* Adjust the data path in configs/xx.yaml
+
+  ```
+  annotation_folder: /datasets/fs/finefs/,
+  vid_feat_folder: /datasets/fs/finefs/i3d,
+  aud_feat_folder: /datasets/fs/finefs/vggish,
+  class_path: /datasets/fs/finefs/24_class.json,
+  ```
+  
+
 **Training and Evaluation**
 
     Please modify the data path in the yaml file first
@@ -85,13 +95,13 @@ tensorboard --logdir=./ckpt/finefs/logs
 * Evaluate the trained model.
 
 ```shell
-python ./eval.py ./configs/finefs.yaml ./ckpt/finefs
+python ./eval.py ./configs/finefs.yaml ./ckpt/finefs/epoch_040.pth.tar
 ```
 
 ## Reference
 If you have referenced our code or paper, please consider citing our paper.
 ```
-@inproceedings{wang2025learning,
+@inproceedings{wang2025MambaFSA,
   title={Learning Long-Range Action Representation by Two-Stream Mamba Pyramid Network for Figure Skating Assessment},
   author={Wang, Fengshun and Wang, Qiurui and Zhao, Peilin},
   booktitle={Proceedings of the 33rd ACM International Conference on Multimedia},
